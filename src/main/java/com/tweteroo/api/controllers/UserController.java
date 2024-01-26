@@ -9,6 +9,9 @@ import com.tweteroo.api.services.UserService;
 
 import jakarta.validation.Valid;
 
+import java.util.Optional;
+
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -25,8 +28,11 @@ public class UserController {
     }
     
     @PostMapping
-    public ResponseEntity<User> postUser(@RequestBody @Valid UserDTO userDto){
-        User user = userService.postUser(userDto);
+    public ResponseEntity<Object> postUser(@RequestBody @Valid UserDTO userDto){
+        Optional<User> user = userService.postUser(userDto);
+
+        if(!user.isPresent())
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("This username is already taken.");
         return ResponseEntity.status(201).body(user);
     }
 }
