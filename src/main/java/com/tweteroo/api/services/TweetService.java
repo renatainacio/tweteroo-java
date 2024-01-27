@@ -1,5 +1,7 @@
 package com.tweteroo.api.services;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.tweteroo.api.dtos.TweetDTO;
@@ -19,5 +21,9 @@ public class TweetService {
 
         Tweet tweet = new Tweet(tweetDTO);
         return tweetRepository.save(tweet);
+    }
+
+    public List<Tweet> getTweets(){
+        return tweetRepository.findAll();
     }
 }

@@ -35,4 +35,5 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.CONFLICT).body("This username is already taken.");
         return ResponseEntity.status(201).body(user);
     }
+
 }
