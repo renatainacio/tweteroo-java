@@ -37,4 +37,9 @@ public class TweetService {
     public List<Tweet> getTweets(){
         return tweetRepository.findAll();
     }
+
+    public List<Tweet> getTweetsByUserId(Long userId){
+        return tweetRepository.findAllByUserId(userId);
+    }
+
 }
