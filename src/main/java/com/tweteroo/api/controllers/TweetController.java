@@ -1,6 +1,7 @@
 package com.tweteroo.api.controllers;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,8 +28,10 @@ public class TweetController {
     }
 
     @PostMapping
-    public ResponseEntity<Tweet> postTweet(@RequestBody @Valid TweetDTO tweetDTO){
-        Tweet tweet = tweetService.postTweet(tweetDTO);
+    public ResponseEntity<Object> postTweet(@RequestBody @Valid TweetDTO tweetDTO){
+        Optional<Tweet> tweet = tweetService.postTweet(tweetDTO);
+        if(!tweet.isPresent())
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("UserId is not valid");
         return ResponseEntity.status(HttpStatus.CREATED).body(tweet);
     }
 

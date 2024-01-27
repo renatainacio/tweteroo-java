@@ -33,7 +33,7 @@ public class UserController {
 
         if(!user.isPresent())
             return ResponseEntity.status(HttpStatus.CONFLICT).body("This username is already taken.");
-        return ResponseEntity.status(201).body(user);
+        return ResponseEntity.status(201).body(user.get());
     }
 
 }

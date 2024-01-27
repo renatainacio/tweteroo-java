@@ -13,5 +13,5 @@ public class TweetDTO {
     private String text;
 
     @NotNull
-    Long userId;
+    private Long userId;
 }
